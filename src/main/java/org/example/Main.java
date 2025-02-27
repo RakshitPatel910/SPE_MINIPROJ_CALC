@@ -77,8 +77,6 @@ public class Main {
             System.out.println();
         }
 
-        //fafhafhklfk
-
         scanner.close();
     }
 }
