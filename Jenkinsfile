@@ -19,23 +19,23 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("${DOCKER_IMAGE_NAME}", '.')
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('', DOCKER_CRED)
-                    "sh docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}"
-                    "sh docker push ${DOCKER_IMAGE_NAME}"
-                }
-            }
-        }
+//         stage('Build Docker Image') {
+//             steps {
+//                 script {
+//                     docker.build("${DOCKER_IMAGE_NAME}", '.')
+//                 }
+//             }
+//         }
+//
+//         stage('Push Docker Image') {
+//             steps {
+//                 script {
+//                     docker.withRegistry('', DOCKER_CRED)
+//                     "sh docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}"
+//                     "sh docker push ${DOCKER_IMAGE_NAME}"
+//                 }
+//             }
+//         }
 
         stage('Build') {
             steps {
