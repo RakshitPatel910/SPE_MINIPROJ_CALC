@@ -1,11 +1,22 @@
 pipeline {
     agent any
 
+    agent any
+    triggers {
+        githubPush()
+    }
+    environment {
+        DOCKER_IMAGE_NAME = 'scientific-calculator'
+        GITHUB_REPO_URL = 'https://github.com/RakshitPatel910/SPE_MINIPROJ_CALC.git'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from the configured SCM (GitHub in your case)
-                checkout scm
+                script {
+                    // Checkout the code from the GitHub repository
+                    git branch: 'master', url: "${GITHUB_REPO_URL}"
+                }
             }
         }
         stage('Build') {
