@@ -66,6 +66,11 @@ public class Main {
                     System.out.println(base + " raised to the power " + exponent + " is " + Math.pow(base, exponent));
                     break;
 
+                case 5:
+                    exit = true;
+                    System.out.println("Exiting calculator. Goodbye!");
+                    break;
+
                 default:
                     System.out.println("Invalid choice. Please select a valid option (1-5).");
             }
