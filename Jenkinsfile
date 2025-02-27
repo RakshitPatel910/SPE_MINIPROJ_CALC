@@ -27,12 +27,14 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Docker Push') {
             steps {
-                script {
-                    docker.withRegistry('', DOCKER_CRED)
-                    sh "docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}"
-                    sh "docker push ${DOCKER_IMAGE_NAME}"
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_CRED', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                    docker login -u $DOCKER_USER -p $DOCKER_PASS
+                    docker tag scientific-calculator scientific-calculator:latest
+                    docker push scientific-calculator:latest
+                    '''
                 }
             }
         }
