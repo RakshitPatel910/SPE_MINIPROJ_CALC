@@ -6,13 +6,13 @@
   tasks:
     - name: Pull Docker image from Docker Hub
       docker_image:
-        name: rakshit910/scientific_calculator
+        name: rakshit910/scientific-calculator
         tag: latest
         source: pull
 
     - name: Run Docker container
       docker_container:
-        name: scientific_calculator
-        image: rakshit910/scientific_calculator:latest
+        name: scientific-calculator
+        image: rakshit910/scientific-calculator:latest
         state: started
         restart_policy: always
