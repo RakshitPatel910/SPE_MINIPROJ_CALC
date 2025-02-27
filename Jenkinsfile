@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'rakshit910/scientific-calculator'
         GITHUB_REPO_URL = 'https://github.com/RakshitPatel910/SPE_MINIPROJ_CALC.git'
-        DOCKER_CRED = 'your-dockerhub-credential-id'
     }
 
     stages {
