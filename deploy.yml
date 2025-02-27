@@ -1,7 +1,6 @@
 - name: Deploy Docker Container
   hosts: localhost
   become: true
-  gather_facts: no
   tasks:
     - name: Check if Docker is installed
       apt:
