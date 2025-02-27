@@ -62,11 +62,11 @@ pipeline {
 
         post {
             failure {
-                mail {
+                mail (
                     to: 'PatelRakshit.Chandulal@iiitb.ac.in',
                     subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: "Check Jenkins logs: ${env.BUILD_URL}"
-                }
+                )
             }
         }
     }
