@@ -4,9 +4,8 @@ pipeline {
     triggers {
         githubPush()
     }
-
     environment {
-        DOCKER_IMAGE_NAME = 'rakshit910/scientific-calculator'
+        DOCKER_IMAGE_NAME = 'scientific-calculator'
         GITHUB_REPO_URL = 'https://github.com/RakshitPatel910/SPE_MINIPROJ_CALC.git'
     }
 
@@ -23,7 +22,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the image with the correct tag
                     docker.build("${DOCKER_IMAGE_NAME}", '.')
                 }
             }
@@ -32,15 +30,16 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', env.DOCKER_CRED) {
-                        sh "docker push ${DOCKER_IMAGE_NAME}:latest"
-                    }
+                    docker.withRegistry('', DOCKER_CRED)
+                    sh "docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}"
+                    sh "docker push ${DOCKER_IMAGE_NAME}"
                 }
             }
         }
 
         stage('Build') {
             steps {
+                // Run the Maven build command; adjust if you're using another tool
                 sh 'mvn clean install'
                 sh 'mvn test'
             }
