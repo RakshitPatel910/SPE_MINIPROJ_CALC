@@ -39,10 +39,34 @@ pipeline {
             }
         }
 
+        stage('Deploy with Ansible') {
+            steps {
+                script {
+                    withEnv(["ANSIBLE_HOST_KEY_CHECKING=False"]) {
+                        ansiblePlaybook(
+                            playbook: 'deploy.yml',
+                            inventory: 'inventory.ini',
+                            credentialsId: 'ANSIBLE_SSH_CRED'
+                        )
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'mvn clean install'
                 sh 'mvn test'
+            }
+        }
+
+        post {
+            failure {
+                mail {
+                    to: 'PatelRakshit.Chandulal@iiitb.ac.in',
+                    subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "Check Jenkins logs: ${env.BUILD_URL}"
+                }
             }
         }
     }

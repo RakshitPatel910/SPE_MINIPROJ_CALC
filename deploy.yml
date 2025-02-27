@@ -1,0 +1,32 @@
+- name: Deploy Docker Container
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Check if Docker is installed
+      apt:
+        name: docker.io
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Pull image from Docker Hub
+      community.docker.docker_image:
+        name: rakshit910/scientific-calculator
+        tag: latest
+        source: pull
+
+    - name: Replace old container (stop and remove)
+      community.docker.docker_container:
+        name: scientific-calculator
+        state: absent
+        force_kill: yes
+
+    - name: Run new container
+      community.docker.docker_container:
+        name: scientific-calculator
+        image: rakshit910/scientific-calculator:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "9090:8080"
+        interactive: yes
+        tty: yes
