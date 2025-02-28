@@ -20,6 +20,13 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+                sh 'mvn test'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -50,13 +57,6 @@ pipeline {
                         )
                     }
                 }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
-                sh 'mvn test'
             }
         }
     }
