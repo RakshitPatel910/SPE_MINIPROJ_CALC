@@ -76,7 +76,7 @@ public class Main {
             }
             System.out.println();
         }
-
+//fanfanf
         scanner.close();
     }
 }
