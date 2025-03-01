@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Main {
 
     public static long factorial(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
+        }
         long result = 1;
         for (int i = 1; i <= n; i++) {
             result *= i;
@@ -24,7 +27,6 @@ public class Main {
             System.out.println("4. Power Function (x^b)");
             System.out.println("5. Exit");
             System.out.print("Enter your choice (1-5): ");
-            System.out.flush();
 
             int choice = scanner.nextInt();
 
@@ -77,7 +79,7 @@ public class Main {
             }
             System.out.println();
         }
-//fanfanf
+
         scanner.close();
     }
 }
