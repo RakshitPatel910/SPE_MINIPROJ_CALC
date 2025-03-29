@@ -3,7 +3,7 @@ package org.example;
 import java.util.Scanner;
 
 public class Main {
-
+//for test
     public static long factorial(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
