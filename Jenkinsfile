@@ -14,7 +14,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Checkout the code from the GitHub repository
                     git branch: 'master', url: "${GITHUB_REPO_URL}"
                 }
             }
@@ -30,7 +29,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the image with the correct tag
+                    // Build the image
                     docker.build("${DOCKER_IMAGE_NAME}", '.')
                 }
             }
